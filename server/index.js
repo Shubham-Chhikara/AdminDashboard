@@ -10,7 +10,7 @@ import generalRoutes from "./routes/general.js";
 import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
 import connectToMongo from "./db.js";
-connectToMongo();  
+connectToMongo();
 
 // data imports
 import User from "./models/User.js";
@@ -45,8 +45,8 @@ app.use("/general", generalRoutes);
 app.use("/management", managementRoutes);
 app.use("/sales", salesRoutes);
 
-const port =  5000;
+const port = 5000;
 
-app.listen(port,()=>{
+app.listen(port, () => {
   console.log("Server started at port " + port);
-})
+});

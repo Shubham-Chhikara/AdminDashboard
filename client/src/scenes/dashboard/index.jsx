@@ -15,7 +15,6 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
 import BreakdownChart from "components/BreakdownChart";
 import OverviewChart from "components/OverviewChart";
 import { useGetDashboardQuery } from "state/api";
@@ -24,38 +23,7 @@ import StatBox from "components/StatBox";
 const Dashboard = () => {
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
-  const { data, isLoading } = useGetDashboardQuery();
-
-  const columns = [
-    {
-      field: "_id",
-      headerName: "ID",
-      flex: 1,
-    },
-    {
-      field: "userId",
-      headerName: "User ID",
-      flex: 1,
-    },
-    {
-      field: "createdAt",
-      headerName: "CreatedAt",
-      flex: 1,
-    },
-    {
-      field: "products",
-      headerName: "# of Products",
-      flex: 0.5,
-      sortable: false,
-      renderCell: (params) => params.value.length,
-    },
-    {
-      field: "cost",
-      headerName: "Cost",
-      flex: 1,
-      renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
-    },
-  ];
+  const { data } = useGetDashboardQuery();
 
   return (
     <Box m="1.5rem 2.5rem">
@@ -144,42 +112,6 @@ const Dashboard = () => {
         />
 
         {/* ROW 2 */}
-        <Box
-          gridColumn="span 8"
-          gridRow="span 3"
-          sx={{
-            "& .MuiDataGrid-root": {
-              border: "none",
-              borderRadius: "5rem",
-            },
-            "& .MuiDataGrid-cell": {
-              borderBottom: "none",
-            },
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: theme.palette.background.alt,
-              color: theme.palette.secondary[100],
-              borderBottom: "none",
-            },
-            "& .MuiDataGrid-virtualScroller": {
-              backgroundColor: theme.palette.background.alt,
-            },
-            "& .MuiDataGrid-footerContainer": {
-              backgroundColor: theme.palette.background.alt,
-              color: theme.palette.secondary[100],
-              borderTop: "none",
-            },
-            "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-              color: `${theme.palette.secondary[200]} !important`,
-            },
-          }}
-        >
-          <DataGrid
-            loading={isLoading || !data}
-            getRowId={(row) => row._id}
-            rows={(data && data.transactions) || []}
-            columns={columns}
-          />
-        </Box>
         <Box
           gridColumn="span 4"
           gridRow="span 3"
